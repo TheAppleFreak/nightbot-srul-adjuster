@@ -15,7 +15,9 @@ const { api, chat, chatConstants } = new Twitch({
 let timeout: schedule.Job;
 
 chat.on(`PRIVMSG/${process.env.GLITCH_LASAGNA_TWITCH_CHANNEL}`, async msg => {
-    if(!msg.isSelf && (msg.tags.mod === "1" || msg.tags.badges.broadcaster)) {
+    const username = msg.username.toLowerCase();
+
+    if(!msg.isSelf && (msg.tags.mod === "1" || msg.tags.badges.broadcaster) && (username !== "nightbot" || username !== "streamlabs" || username !== "streamelements")) {
         const message: string = msg.message.trim().toLowerCase();
         if (message.startsWith("!opensongrequests") || message.startsWith("!opensr") || message.startsWith("!opensrs")) {
             try {
