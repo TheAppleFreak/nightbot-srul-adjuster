@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+	    "module": "commonjs",
+		"declaration": true,
+		"noImplicitAny": false,
+		"noLib": false,
+		"target": "es2018",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"inlineSourceMap": false,
+		"pretty": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"resolveJsonModule": true,
+		"paths": {
+			"@helpers/*": ["helpers/*"],
+			"@models/*": ["models/*"],
+			"@services/*": ["services/*"]
+		},
+		"outDir": "./build",
+		"rootDir": "./src",
+		"baseUrl": "./src"
+	},
+	"include": [
+		"src/**/*.ts"
+	],
+	"exclude": [
+		"node_modules/**"
+	]
+}
