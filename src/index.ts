@@ -24,6 +24,12 @@ chat.on(`PRIVMSG/${process.env.GLITCH_LASAGNA_TWITCH_CHANNEL}`, async msg => {
             } catch (err) {
                 chat.say(process.env.GLITCH_LASAGNA_TWITCH_CHANNEL, `@${msg.tags.displayName != "" ? msg.tags.displayName : msg.username }: Error setting song request userlevel to "everyone". Contact @TheAaplFreak to get this fixed.`);
             }
+        } else if (message.startsWith("!closesongrequests") || message.startsWith("!closesr") || message.startsWith("!closesrs")) {
+            try {
+                await setSubscriberOnly();
+            } catch (err) {
+                // idk
+            }
         }
     }
 });

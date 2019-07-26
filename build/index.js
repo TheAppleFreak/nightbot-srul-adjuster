@@ -25,6 +25,14 @@ chat.on(`PRIVMSG/${process.env.GLITCH_LASAGNA_TWITCH_CHANNEL}`, async (msg) => {
                 chat.say(process.env.GLITCH_LASAGNA_TWITCH_CHANNEL, `@${msg.tags.displayName != "" ? msg.tags.displayName : msg.username}: Error setting song request userlevel to "everyone". Contact @TheAaplFreak to get this fixed.`);
             }
         }
+        else if (message.startsWith("!closesongrequests") || message.startsWith("!closesr") || message.startsWith("!closesrs")) {
+            try {
+                await setSubscriberOnly();
+            }
+            catch (err) {
+                // idk
+            }
+        }
     }
 });
 async function setAllUsers() {
@@ -41,7 +49,7 @@ async function setAllUsers() {
     });
     if (timeout !== undefined)
         timeout.cancel(false);
-    timeout = schedule.scheduleJob(moment().add(60, "s").toDate(), setSubscriberOnly);
+    timeout = schedule.scheduleJob(moment().add(15, "m").toDate(), setSubscriberOnly);
     return res;
 }
 async function setSubscriberOnly() {
@@ -100,6 +108,7 @@ server.use("/auth/callback", (req, res) => {
         tokens.access = response.access_token;
         tokens.refresh = response.refresh_token;
         setInterval(refreshAccessToken, 2590000);
+        console.log("Application authorized.");
         res.send("Application authorized.");
     });
 });
