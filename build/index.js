@@ -93,6 +93,10 @@ const tokens = {
 server.use("/auth/callback", (req, res) => {
     if (req.query.error)
         throw new Error("Something went wrong:" + req.query.error);
+    if (tokens.access !== undefined) {
+        res.send("Already authorized application");
+        return;
+    }
     request({
         method: "POST",
         uri: "https://api.nightbot.tv/oauth2/token",
