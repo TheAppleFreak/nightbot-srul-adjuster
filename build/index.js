@@ -112,7 +112,7 @@ server.use("/auth/callback", (req, res) => {
     }).then(response => {
         tokens.access = response.access_token;
         tokens.refresh = response.refresh_token;
-        setInterval(refreshAccessToken, 2590000);
+        setInterval(refreshAccessToken, Math.pow(2,31)-1);
         console.log("Application authorized.");
         res.send("Application authorized.");
     });
